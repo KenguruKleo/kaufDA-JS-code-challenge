@@ -5,7 +5,7 @@ let config = {
     entry: "./app/index.js",
 
     output: {
-        path: __dirname,
+        path: path.join(__dirname, "build"),
         publicPath: '/',
         filename: "bundle.js"
     },
