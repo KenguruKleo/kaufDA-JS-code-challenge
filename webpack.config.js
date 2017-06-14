@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const prod = process.argv.indexOf('-p') !== -1;
 
 let config = {
     entry: "./app/index.js",
@@ -43,21 +42,6 @@ let config = {
     }
 };
 
-config.plugins = config.plugins||[];
-if (prod) {
-    config.plugins.push(new webpack.DefinePlugin({
-        'process.env': {
-            'NODE_ENV': `"production"`
-        }
-    }));
-} else {
-    config.devtool = 'source-map';
-    config.plugins.push(new webpack.DefinePlugin({
-        'process.env': {
-            'NODE_ENV': `""`
-        }
-    }));
-    config.plugins.push(new webpack.HotModuleReplacementPlugin());
-}
+config.devtool = 'source-map';
 
 module.exports = config;
