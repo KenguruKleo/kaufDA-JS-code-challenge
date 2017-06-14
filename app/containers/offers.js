@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, Label } from 'react-bootstrap';
+import { Panel, Row, Col } from 'react-bootstrap';
 import { fetchOffers } from '../reducers/offers';
 import Offer from '../components/offer';
 
@@ -12,8 +12,14 @@ class Offers extends React.Component{
     render() {
         return (
             <Panel>
-                <h2><Label>Offers:</Label></h2>
-                { this.props.offers.map( offer => <Offer {...offer} key={offer.id}/> ) }
+                <Row>
+                    <Col>
+                        <h2>Offers:</h2>
+                    </Col>
+                    <Col xsOffset = {1}>
+                        { this.props.offers.map( offer => <Offer {...offer} key={offer.id}/> ) }
+                    </Col>
+                </Row>
             </Panel>
         );
     }
