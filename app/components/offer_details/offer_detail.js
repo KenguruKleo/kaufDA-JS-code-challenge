@@ -1,11 +1,11 @@
 import React from 'react';
-import { Panel, ProgressBar, Button, Navbar, FormGroup, FormControl } from 'react-bootstrap';
+import { Panel, ProgressBar, Button, Navbar, Alert } from 'react-bootstrap';
 import OfferDetailProperties from './offer_detail_properties';
 
 const OfferDetail = ( props ) => {
     const {
-        id, offer, changeOfferFieldValue, loading, fetchOfferDetails,
-        saveOfferDetails, deleteOfferDetails
+        id, offer, changeOfferFieldValue, loading, error,
+        fetchOfferDetails, saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails
     } = props;
 
     if( loading ){
@@ -34,6 +34,20 @@ const OfferDetail = ( props ) => {
         )
     }
 
+    const handleAlertDismiss = () => resetErrorOfferDetails(id);
+    let alert = null;
+    if( error ){
+        alert = (
+            <Alert bsStyle="danger" onDismiss={handleAlertDismiss}>
+                <h4>Error</h4>
+                <p>{ error }</p>
+                <p>
+                    <Button onClick={handleAlertDismiss}>Hide Alert</Button>
+                </p>
+            </Alert>
+        );
+    }
+
     const save = () => saveOfferDetails(id);
     const refresh = () => fetchOfferDetails(id);
     const del = () => deleteOfferDetails(id);
@@ -57,6 +71,8 @@ const OfferDetail = ( props ) => {
                     </Navbar.Form>
                 </Navbar.Collapse>
             </Navbar>
+
+            { alert }
 
             { offerDetails }
 

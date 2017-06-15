@@ -1,6 +1,7 @@
 import Api from '../transport/api';
 
 const CHANGE_OFFER_FIELD_VALUE = 'kaufDA/offerDetails/CHANGE_OFFER_FIELD_VALUE';
+const RESET_ERROR_OFFER_DETAILS = 'kaufDA/offerDetails/RESET_ERROR_OFFER_DETAILS';
 const FETCH_OFFER_DETAILS = 'kaufDA/offerDetails/FETCH_OFFER_DETAILS';
 const FETCH_OFFER_DETAILS_SUCCESS = 'kaufDA/offerDetails/FETCH_OFFER_DETAILS_SUCCESS';
 const FETCH_OFFER_DETAILS_ERROR = 'kaufDA/offerDetails/FETCH_OFFER_DETAILS_ERROR';
@@ -38,6 +39,8 @@ export default function reducer(state=[], action={}){
                 newItem.offer[ action.index ].properties = properties;
                 return newItem;
             });
+        case RESET_ERROR_OFFER_DETAILS:
+            return offerDetailsSelector( state, action.id, item => ({...item, error: ''}) );
         case SAVE_OFFER_DETAILS:
         case DELETE_OFFER_DETAILS:
             return offerDetailsSelector( state, action.id, item => ({...item, saving: true, error: ''}) );
@@ -91,6 +94,12 @@ export function changeOfferFieldValue( id, index, fieldName, value ){
     return {
         type: CHANGE_OFFER_FIELD_VALUE,
         id, index, fieldName, value
+    }
+}
+
+export function resetErrorOfferDetails( id ) {
+    return {
+        type: RESET_ERROR_OFFER_DETAILS, id
     }
 }
 
