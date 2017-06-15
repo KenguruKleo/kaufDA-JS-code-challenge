@@ -9,7 +9,9 @@ export default function InputText( props ) {
         changeOfferFieldValue( id, index, fieldName, event.target.value );
     };
 
-    return (
-        <FormControl type = {type} value = {value} onChange={handleChange}/>
-    );
+    if (type === "textarea"){
+        return <FormControl componentClass="textarea" value={value} onChange={handleChange}/>
+    } else {
+        return <FormControl type={type} value={value} onChange={handleChange}/>
+    };
 }

@@ -23,7 +23,7 @@ const OfferDetailProperties = ( props ) => {
                             Description
                         </Col>
                         <Col xs={8}>
-                            <InputText type="text" fieldName="description" {...props}/>
+                            <InputText type="textarea" fieldName="description" {...props}/>
                         </Col>
                     </FormGroup>
                 </Form>
