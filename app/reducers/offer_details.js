@@ -7,7 +7,10 @@ const FETCH_OFFER_DETAILS_ERROR = 'kaufDA/offerDetails/FETCH_OFFER_DETAILS_ERROR
 export default function reducer(state=[], action={}){
     switch (action.type){
         case FETCH_OFFER_DETAILS:
-            return state.filter( item => item.id !== action.id);
+            return state.filter( item => {
+                console.log(item.id, action.id);
+                return (item.id != action.id)
+            });
         case FETCH_OFFER_DETAILS_SUCCESS: {
             const newState = state.slice();
             action.data.forEach( item => { newState.push( item ) });

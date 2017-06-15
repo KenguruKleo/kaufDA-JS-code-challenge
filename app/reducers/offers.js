@@ -121,7 +121,7 @@ export function fetchDetails(id){
     return dispatch => {
         dispatch( {type: FETCH_DETAILS, id} );
 
-        dispatch( fetchOfferDetails() )
+        dispatch( fetchOfferDetails( id ) )
             .then( ()=>{
                 dispatch( {type: FETCH_DETAILS_SUCCESS, id} );
             } );
