@@ -3,8 +3,6 @@ import { Row, Col, Form, FormGroup, FormControl, ControlLabel, Image } from 'rea
 import InputText from './input_text';
 
 const OfferDetailProperties = ( props ) => {
-    const {category, description} = props.properties;
-    const {id, index} = props;
 
     return (
         <Row>

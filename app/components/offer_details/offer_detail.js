@@ -1,9 +1,18 @@
 import React from 'react';
-import { Panel, Row, Col, Form, FormGroup, FormControl, ControlLabel, Image } from 'react-bootstrap';
+import { Panel, ProgressBar } from 'react-bootstrap';
 import OfferDetailProperties from './offer_detail_properties';
 
 const OfferDetail = ( props ) => {
-    const {id, offer, changeOfferFieldValue} = props;
+    const {id, offer, changeOfferFieldValue, loading} = props;
+    console.log('loading='+loading);
+
+    if( loading ){
+        return(
+            <Panel>
+                <ProgressBar active now={100} />
+            </Panel>
+        );
+    }
 
     if( !offer || offer.length === 0 ){
         return (

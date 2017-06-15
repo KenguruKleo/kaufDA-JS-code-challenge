@@ -4,7 +4,7 @@ import OfferProperties from './offer_properties';
 import OfferDetails from '../../containers/offer_details';
 
 const Offer = ( props ) => {
-    const {id, properties, toggleShowDetails, showDetails} = props;
+    const {id, properties, toggleShowDetails, showDetails, loading} = props;
 
 
 
@@ -17,7 +17,7 @@ const Offer = ( props ) => {
                 toggleShowDetails = {toggleShowDetails}
                 id = {id}
             />
-            { showDetails ? <OfferDetails id={id}/> : null }
+            { showDetails ? <OfferDetails id={id} loading={loading}/> : null }
         </Panel>
     );
 };

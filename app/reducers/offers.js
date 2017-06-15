@@ -127,11 +127,17 @@ export function fetchDetails(id){
 }
 
 export function toggleShowDetails(id) {
+    return (dispatch, getState) => {
+        const state = getState().offers;
+        const items = state.offers.filter( item => item.id === id );
 
-    return dispatch => {
         dispatch( {type: TOGGLE_SHOW_DETAILS, id} );
 
-        dispatch( fetchDetails(id) );
+        //fetch data if closed
+        if( items.length && ! items[0].showDetails ){
+            dispatch( fetchDetails(id) );
+        }
+
     };
 }
 
