@@ -1,17 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import OfferDetail from '../components/offer_details/offer_detail';
-import { changeOfferFieldValue } from '../reducers/offer_details';
+import {
+    changeOfferFieldValue, getOfferDetailsById, fetchOfferDetails,
+    saveOfferDetails, deleteOfferDetails
+} from '../reducers/offer_details';
 
 function mapStateToProps( state, ownProps ){
-    const item = state.offerDetails.filter(  item => item.id === ownProps.id );
-    const offerDetail = item.length ? item : {};
+    const offerDetail = getOfferDetailsById(state.offerDetails, ownProps.id );
 
     return {
-        ...offerDetail[0]
+        ...offerDetail
     }
 }
 
 export default connect(
-    mapStateToProps, { changeOfferFieldValue }
+    mapStateToProps,
+    { changeOfferFieldValue, fetchOfferDetails, saveOfferDetails, deleteOfferDetails }
 )(OfferDetail)

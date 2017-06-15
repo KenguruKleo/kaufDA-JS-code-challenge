@@ -43,11 +43,17 @@ const router_json = jsonServer.router('./server/json-server/db.json');
 const middlewares_json = jsonServer.defaults();
 
 server_json.use(middlewares_json);
-server_json.use(function (req, res, next) {
-	//console.log(req);
- 	next();
-});
 server_json.use(router_json);
+
+server.use(jsonServer.bodyParser);
+server.use((req, res, next) => {
+    if (req.method === 'POST') {
+        req.body.createdAt = Date.now()
+    }
+    // Continue to JSON Server router
+    next()
+})
+
 const db_port = options.db_port || 3000;
 server_json.listen(db_port, function () {
   console.log('JSON Server is running on port: ' + db_port);
