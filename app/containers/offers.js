@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, Row, Col } from 'react-bootstrap';
 import { fetchOffers, toggleShowDetails } from '../reducers/offers';
-import Offer from '../components/offer';
+import Offer from '../components/offers/offer';
 
 class Offers extends React.Component{
     componentDidMount(){
