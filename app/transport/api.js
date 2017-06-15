@@ -10,6 +10,16 @@ export default {
             .then(
                 ( data )=>{ console.log(data); return data }
             )
+    },
+
+    fetchOfferDetail: function(id){
+        return fetch(Urls.offerDetail)
+            .then(function (res) {
+                return res.json();
+            })
+            .then(
+                ( data )=>{ console.log(data); return data }
+            )
     }
 
 };

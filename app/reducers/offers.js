@@ -8,7 +8,9 @@ const initialState = {
     loading: false,
     error: '',
     loaded: false,
-    offers: []
+    offers: [],
+    showDetails: false,
+    haveDetails: false
 };
 
 export default function reducer(state=initialState, action={}){
@@ -53,6 +55,12 @@ export function fetchOffers(){
                 });
             })
         ;
+    }
+}
+
+export function fetchDetails(id){
+    return dispatch => {
+
     }
 }
 
