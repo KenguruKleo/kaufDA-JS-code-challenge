@@ -10,7 +10,7 @@ export default function InputText( props ) {
     };
 
     if (type === "textarea"){
-        return <FormControl componentClass="textarea" value={value} onChange={handleChange}/>
+        return <FormControl componentClass="textarea" value={value} onChange={handleChange} style={{ height: 200 }}/>
     } else {
         return <FormControl type={type} value={value} onChange={handleChange}/>
     };

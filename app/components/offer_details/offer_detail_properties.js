@@ -14,20 +14,18 @@ const OfferDetailProperties = ( props ) => {
 
                     <InputTextWithLabel type="text" fieldName="name" label="Name" {...props}/>
                     <InputTextWithLabel type="text" fieldName="category" label="Category" {...props}/>
-                    <InputTextWithLabel type="textarea" fieldName="description" label="Description" {...props}/>
                     <InputTextWithLabel type="text" fieldName="productName" label="Product name" {...props}/>
                     <InputTextWithLabel type="text" fieldName="retailerUrl" label="Related URL" {...props}/>
-
-                </Form>
-            </Col>
-            <Col xs={6}>
-                <Form horizontal>
-
                     <InputTextWithLabel type="text" fieldName="productBrand" label="Product Brand" {...props}/>
                     <InputPriceOffer type="text" fieldName="reducedPrice" label="Reduced price" {...props}/>
                     <InputPriceOffer type="text" fieldName="originalPrice" label="Original price" {...props}/>
                     <InputImagePointer type="text" fieldName="productImagePointer" label="Image pointer" {...props}/>
 
+                </Form>
+            </Col>
+            <Col xs={6}>
+                <Form horizontal>
+                    <InputTextWithLabel type="textarea" fieldName="description" label="Description" {...props}/>
                 </Form>
             </Col>
         </Row>
