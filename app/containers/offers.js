@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, Row, Col } from 'react-bootstrap';
-import { fetchOffers } from '../reducers/offers';
+import { fetchOffers, toggleShowDetails } from '../reducers/offers';
 import Offer from '../components/offer';
 
 class Offers extends React.Component{
@@ -17,7 +17,9 @@ class Offers extends React.Component{
                         <h2>Offers:</h2>
                     </Col>
                     <Col xsOffset = {1}>
-                        { this.props.offers.map( offer => <Offer {...offer} key={offer.id}/> ) }
+                        {this.props.offers.map(
+                            offer => <Offer {...offer} key={offer.id} toggleShowDetails={this.props.toggleShowDetails}/>
+                        )}
                     </Col>
                 </Row>
             </Panel>
@@ -29,5 +31,5 @@ export default connect(
     state => ({
         ...state.offers
     }),
-    { fetchOffers }
+    { fetchOffers, toggleShowDetails }
 )(Offers);

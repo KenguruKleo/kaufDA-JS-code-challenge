@@ -1,8 +1,12 @@
 import Api from '../transport/api';
+import { fetchOfferDetails } from './offer_details';
 
 const FETCH_OFFERS = 'kaufDA/offers/FETCH_OFFERS';
 const FETCH_OFFERS_SUCCESS = 'kaufDA/offers/FETCH_OFFERS_SUCCESS';
 const FETCH_OFFERS_ERROR = 'kaufDA/offers/FETCH_OFFERS_ERROR';
+const FETCH_DETAILS = 'kaufDA/offers/FETCH_DETAILS';
+const FETCH_DETAILS_SUCCESS = 'kaufDA/offers/FETCH_DETAILS_SUCCESS';
+const TOGGLE_SHOW_DETAILS = 'kaufDA/offers/TOGGLE_SHOW_DETAILS';
 
 const initialState = {
     loading: false,
@@ -12,6 +16,46 @@ const initialState = {
     showDetails: false,
     haveDetails: false
 };
+
+function detail(state={}, action){
+    switch (action.type) {
+        case FETCH_DETAILS:
+            if (action.id === state.id){
+                return {
+                    ...state,
+                    showDetails: true,
+                    loading: true
+                }
+            } else {
+                return {...state}
+            }
+        case FETCH_DETAILS_SUCCESS:
+            if (action.id === state.id){
+                return {
+                    ...state,
+                    showDetails: true,
+                    loading: false
+                }
+            } else {
+                return {...state}
+            }
+        case TOGGLE_SHOW_DETAILS:
+            if (action.id === state.id){
+                return {
+                    ...state,
+                    showDetails: !state.showDetails
+                }
+            } else {
+                return {...state}
+            }
+        default:
+            return {
+                ...state,
+                showDetails: false,
+                loading: false
+            };
+    }
+}
 
 export default function reducer(state=initialState, action={}){
     switch (action.type) {
@@ -28,7 +72,22 @@ export default function reducer(state=initialState, action={}){
                 loading: false,
                 error: '',
                 loaded: true,
-                offers: action.offers
+                offers: action.offers.map( item => detail(item, action) )
+            };
+        case FETCH_DETAILS:
+            return {
+                ...state,
+                offers: state.offers.map( item => detail(item, action) )
+            };
+        case FETCH_DETAILS_SUCCESS:
+            return {
+                ...state,
+                offers: state.offers.map( item => detail(item, action) )
+            };
+        case TOGGLE_SHOW_DETAILS:
+            return {
+                ...state,
+                offers: state.offers.map( item => detail(item, action) )
             };
         default:
             return {
@@ -60,8 +119,22 @@ export function fetchOffers(){
 
 export function fetchDetails(id){
     return dispatch => {
+        dispatch( {type: FETCH_DETAILS, id} );
 
-    }
+        dispatch( fetchOfferDetails() )
+            .then( ()=>{
+                dispatch( {type: FETCH_DETAILS_SUCCESS, id} );
+            } );
+    };
+}
+
+export function toggleShowDetails(id) {
+
+    return dispatch => {
+        dispatch( {type: TOGGLE_SHOW_DETAILS, id} );
+
+        dispatch( fetchDetails(id) );
+    };
 }
 
 

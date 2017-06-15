@@ -1,23 +1,24 @@
 import Api from '../transport/api';
 
-const FETCH_OFFER_DETAILS = 'kaufDA/offers/FETCH_OFFER_DETAILS';
-const FETCH_OFFER_DETAILS_SUCCESS = 'kaufDA/offers/FETCH_OFFER_DETAILS_SUCCESS';
-const FETCH_OFFER_DETAILS_ERROR = 'kaufDA/offers/FETCH_OFFER_DETAILS_ERROR';
+const FETCH_OFFER_DETAILS = 'kaufDA/offerDetails/FETCH_OFFER_DETAILS';
+const FETCH_OFFER_DETAILS_SUCCESS = 'kaufDA/offerDetails/FETCH_OFFER_DETAILS_SUCCESS';
+const FETCH_OFFER_DETAILS_ERROR = 'kaufDA/offerDetails/FETCH_OFFER_DETAILS_ERROR';
 
-const initialState = [];
-
-export default function reducer(state=initialState, action={}){
+export default function reducer(state=[], action={}){
     switch (action.type){
         case FETCH_OFFER_DETAILS:
             return state.filter( item => item.id !== action.id);
-        case FETCH_OFFER_DETAILS_SUCCESS:
-            return state.push( action.data );
-        case FETCH_OFFER_DETAILS_ERROR:
-            return state.push( {id: action.id, error: action.error} );
+        case FETCH_OFFER_DETAILS_SUCCESS: {
+            const newState = state.slice();
+            action.data.forEach( item => { newState.push( item ) });
+            return newState;
+        }
+        case FETCH_OFFER_DETAILS_ERROR: {
+            const newState = state.slice();
+            return newState.push({id: action.id, error: action.error});
+        }
         default:
-            return {
-                ...state
-            }
+            return state;
     }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, FormControl, ControlLabel, Image } from 'react-bootstrap';
 
-const OfferDetailes = ( {category, description} ) => {
+const OfferDetails = ( {category, description} ) => {
     return (
         <Row>
             <Col>
@@ -28,4 +28,4 @@ const OfferDetailes = ( {category, description} ) => {
     );
 };
 
-export default OfferDetailes;
+export default OfferDetails;
