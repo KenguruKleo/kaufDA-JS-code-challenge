@@ -4,11 +4,11 @@ import OfferDetailProperties from './offer_detail_properties';
 
 const OfferDetail = ( props ) => {
     const {
-        id, offer, changeOfferFieldValue, loading, error,
+        id, offer, changeOfferFieldValue, loading, saving, error,
         fetchOfferDetails, saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails
     } = props;
 
-    if( loading ){
+    if( loading || saving ){
         return(
             <Panel>
                 <ProgressBar active now={100} />
