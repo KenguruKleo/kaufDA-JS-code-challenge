@@ -1,17 +1,21 @@
 import React from 'react';
 import { Row, Col, Form, FormGroup, FormControl, ControlLabel, Image } from 'react-bootstrap';
+import InputText from './input_text';
 
-const OfferDetails = ( {category, description} ) => {
+const OfferDetailProperties = ( props ) => {
+    const {category, description} = props.properties;
+    const {id, index} = props;
+
     return (
         <Row>
-            <Col>
+            <Col xs={6}>
                 <Form horizontal>
                     <FormGroup controlId="formHorizontalEmail">
                         <Col componentClass={ControlLabel} xs={4}>
                             Category
                         </Col>
                         <Col xs={8}>
-                            <FormControl type="text" value={category}/>
+                            <InputText type="text" fieldName="category" {...props}/>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalEmail">
@@ -19,7 +23,7 @@ const OfferDetails = ( {category, description} ) => {
                             Description
                         </Col>
                         <Col xs={8}>
-                            <FormControl type="text" value={description}/>
+                            <InputText type="text" fieldName="description" {...props}/>
                         </Col>
                     </FormGroup>
                 </Form>
@@ -28,4 +32,4 @@ const OfferDetails = ( {category, description} ) => {
     );
 };
 
-export default OfferDetails;
+export default OfferDetailProperties;

@@ -1,22 +1,25 @@
 import React from 'react';
-import { Row, Col, Form, FormGroup, FormControl, ControlLabel, Image } from 'react-bootstrap';
+import { Button, Row, Col, Form, FormGroup, FormControl, ControlLabel, Image } from 'react-bootstrap';
 import PriceProposal from './price_proposal';
 
-const OfferProperties = ( {name, reducedPrice, originalPrice, productImagePointer} ) => {
+const OfferProperties = ( props) => {
+    const {
+        reducedPrice, originalPrice, productImagePointer, toggleShowDetails,
+        showDetails, id
+    } = props;
+
+    const click = () => {
+        toggleShowDetails(id);
+    };
+
     return (
         <Row>
             <Col xs = {4}>
                 <Form horizontal>
-                    <FormGroup controlId="formHorizontalEmail">
-                        <Col componentClass={ControlLabel} xs={4}>
-                            Name
-                        </Col>
-                        <Col xs={8}>
-                            <FormControl type="text" value={name} disabled/>
-                        </Col>
-                    </FormGroup>
                     <PriceProposal priceName="Reduced price" {...reducedPrice} />
                     <PriceProposal priceName="Original price" {...originalPrice} />
+
+                    <Button onClick={click}>{ !showDetails ? "Show details":"Hide details" }</Button>
                 </Form>
             </Col>
             <Col xs = {8}>

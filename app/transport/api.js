@@ -8,7 +8,7 @@ export default {
                 return res.json();
             })
             .then(
-                ( data )=>{ console.log(data); return data }
+                ( data )=>{ return data }
             )
     },
 
@@ -18,7 +18,7 @@ export default {
                 return res.json();
             })
             .then(
-                ( data )=>{ console.log(data); return data }
+                ( data )=>{ return data }
             )
     }
 

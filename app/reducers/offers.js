@@ -23,7 +23,6 @@ function detail(state={}, action){
             if (action.id === state.id){
                 return {
                     ...state,
-                    showDetails: true,
                     loading: true
                 }
             } else {
@@ -33,7 +32,6 @@ function detail(state={}, action){
             if (action.id === state.id){
                 return {
                     ...state,
-                    showDetails: true,
                     loading: false
                 }
             } else {

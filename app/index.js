@@ -7,7 +7,7 @@ import { createLogger } from 'redux-logger';
 import App from './containers/app';
 import reducers from './reducers';
 
-const middleware = [thunk, createLogger()];
+const middleware = [thunk];
 const store = createStore(reducers, {}, compose(
     applyMiddleware(...middleware),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f

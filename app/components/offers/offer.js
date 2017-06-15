@@ -1,15 +1,23 @@
 import React from 'react';
 import { Panel, Label } from 'react-bootstrap';
 import OfferProperties from './offer_properties';
+import OfferDetails from '../../containers/offer_details';
 
-const Offer = ( {id, createdAt, properties, toggleShowDetails} ) => {
-    const click = () => {
-        toggleShowDetails(id);
-    };
+const Offer = ( props ) => {
+    const {id, properties, toggleShowDetails, showDetails} = props;
+
+
+
     return (
-        <Panel onClick={click}>
-            <h3><Label>Offer:</Label> {id} <Label>created:</Label> {createdAt}</h3>
-            <OfferProperties {...properties}/>
+        <Panel >
+            <h3><Label>{properties.name}</Label></h3>
+            <OfferProperties
+                {...properties}
+                showDetails = {showDetails}
+                toggleShowDetails = {toggleShowDetails}
+                id = {id}
+            />
+            { showDetails ? <OfferDetails id={id}/> : null }
         </Panel>
     );
 };
