@@ -1,6 +1,6 @@
 # Code Challenge for kauf DA
 
-At first you should install webpack and npm
+At first you should install `webpack` and `npm`
 
 ## For prod mode
 * npm install
