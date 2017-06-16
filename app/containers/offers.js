@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, Row, Col } from 'react-bootstrap';
+import { Row, Col, Navbar } from 'react-bootstrap';
 import { fetchOffers, toggleShowDetails } from '../reducers/offers';
 import Offer from '../components/offers/offer';
 
@@ -11,18 +11,21 @@ class Offers extends React.Component{
 
     render() {
         return (
-            <Panel>
-                <Row>
-                    <Col>
-                        <h2>Offers:</h2>
-                    </Col>
-                    <Col xsOffset = {1}>
-                        {this.props.offers.map(
-                            offer => <Offer {...offer} key={offer.id} toggleShowDetails={this.props.toggleShowDetails}/>
-                        )}
-                    </Col>
-                </Row>
-            </Panel>
+
+            <Row>
+                <Col xsOffset = {1} xs = {10}>
+                    <Navbar>
+                        <Navbar.Header>
+                            <Navbar.Brand>
+                                <a>Offers</a>
+                            </Navbar.Brand>
+                        </Navbar.Header>
+                    </Navbar>
+                    {this.props.offers.map(
+                        offer => <Offer {...offer} key={offer.id} toggleShowDetails={this.props.toggleShowDetails}/>
+                    )}
+                </Col>
+            </Row>
         );
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Offers from '../containers/offers';
-import { Navbar, Panel } from 'react-bootstrap'
+import { Navbar, Panel, Row, Col } from 'react-bootstrap'
 
 class App extends React.Component{
     render() {
@@ -12,9 +12,11 @@ class App extends React.Component{
 
                     </Navbar.Header>
                 </Navbar>
-                <div>
-                    <Offers />
-                </div>
+                <Row>
+                    <Col lg = {8} lgOffset = {2}>
+                        <Offers />
+                    </Col>
+                </Row>
             </div>
         );
     }
