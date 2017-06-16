@@ -4,7 +4,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dev-server --port=8080 --db_port=3000"
+    "start-dev": "concurrently --kill-others \"npm run start-json-server\" \"npm run webpack-dev-server\"",
+    "start": "concurrently --kill-others \"npm run start-json-server\" \"npm run server\"",
+    "start-json-server": "node ./json-server --db_port 3000",
+    "webpack-dev-server": "webpack-dev-server --progress --hot --inline --port 8080",
+    "build": "webpack -p",
+    "server": "node ./server --port 8080"
   },
   "author": "Yemelianov Konstantin",
   "license": "",
@@ -17,8 +22,7 @@
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "webpack": "2.3.3"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "6.23.0",
@@ -29,10 +33,13 @@
     "babel-preset-react": "6.23.0",
     "babel-preset-stage-0": "6.22.0",
     "command-line-args": "^4.0.6",
+    "concurrently": "^3.4.0",
     "css-loader": "0.19.0",
     "file-loader": "0.8.5",
+    "http-proxy": "^1.16.2",
     "json-server": "^0.10.1",
     "url-loader": "0.5.8",
+    "webpack": "2.3.3",
     "webpack-dev-server": "2.4.1"
   }
 }

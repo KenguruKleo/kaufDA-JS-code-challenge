@@ -1,18 +1,27 @@
 const path = require('path');
 const webpack = require('webpack');
+const prod = process.argv.indexOf('-p') !== -1;
 
 let config = {
     entry: "./app/index.js",
 
     output: {
-        path: path.join(__dirname, "build"),
+        path: path.join(__dirname, "public"),
         publicPath: '/',
         filename: "bundle.js"
     },
 
     devServer: {
         contentBase: path.join(__dirname, "public"),
-        compress: true
+        compress: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                pathRewrite: {'^/api' : ''},
+                changeOrigin: true,
+                secure: false
+            }
+        }
     },
 
     plugins: [
@@ -42,6 +51,21 @@ let config = {
     }
 };
 
-config.devtool = 'source-map';
+config.plugins = config.plugins||[];
+if (prod) {
+    config.plugins.push(new webpack.DefinePlugin({
+        'process.env': {
+            'NODE_ENV': `"production"`
+        }
+    }));
+} else {
+    config.devtool = 'source-map';
+    config.plugins.push(new webpack.DefinePlugin({
+        'process.env': {
+            'NODE_ENV': `""`
+        }
+    }));
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
+}
 
 module.exports = config;
