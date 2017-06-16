@@ -1,7 +1,8 @@
 import React from 'react';
-import { Row, Col, Form, FormGroup, FormControl, ControlLabel, Image } from 'react-bootstrap';
+import { Row, Col, Form, FormGroup, FormControl, ControlLabel, Image, form } from 'react-bootstrap';
 import InputText from './input_text';
 import InputTextWithLabel from './input_text_with_label';
+import InputTextWithLabelVertical from './input_text_with_label_vertical';
 import InputPriceOffer from './input_price_offer';
 import InputImagePointer from './input_image_pointer';
 
@@ -24,9 +25,9 @@ const OfferDetailProperties = ( props ) => {
                 </Form>
             </Col>
             <Col xs={6}>
-                <Form horizontal>
-                    <InputTextWithLabel type="textarea" fieldName="description" label="Description" {...props}/>
-                </Form>
+                <form>
+                    <InputTextWithLabelVertical type="textarea" fieldName="description" label="Description" {...props}/>
+                </form>
             </Col>
         </Row>
     );
