@@ -26,17 +26,17 @@ export default {
             )
     },
 
-    saveOfferDetail: function(id, data){
+    saveOfferDetail: function(id, data, method){
         return fetch(
-            Urls.offerDetail + '/' + id, {
-                method: 'put',
+            Urls.offerDetail + (method.toLowerCase() === 'put' ? ('/' + id) : ''), {
+                method: method,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
          }).then(function (res) {
-            if( res.status === 200 ){
+            if( res.status === 200 || res.status === 201){
                 return res.json();
             } else {
                 throw ({message: "error saving data"});

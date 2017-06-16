@@ -1,4 +1,6 @@
 import Api from '../transport/api';
+import { clone } from '../utils/utils';
+import emptyOfferDetails from '../utils/empty_offer_detiles';
 
 const CHANGE_OFFER_FIELD_VALUE = 'kaufDA/offerDetails/CHANGE_OFFER_FIELD_VALUE';
 const RESET_ERROR_OFFER_DETAILS = 'kaufDA/offerDetails/RESET_ERROR_OFFER_DETAILS';
@@ -11,6 +13,7 @@ const SAVE_OFFER_DETAILS_ERROR = 'kaufDA/offerDetails/SAVE_OFFER_DETAILS_ERROR';
 const DELETE_OFFER_DETAILS = 'kaufDA/offerDetails/DELETE_OFFER_DETAILS';
 const DELETE_OFFER_DETAILS_SUCCESS = 'kaufDA/offerDetails/DELETE_OFFER_DETAILS_SUCCESS';
 const DELETE_OFFER_DETAILS_ERROR = 'kaufDA/offerDetails/DELETE_OFFER_DETAILS_ERROR';
+const CREATE_NEW_OFFER_DETAILS = 'kaufDA/offerDetails/CREATE_NEW_OFFER_DETAILS';
 
 export default function reducer(state=[], action={}){
     switch (action.type){
@@ -21,11 +24,8 @@ export default function reducer(state=[], action={}){
             newState.push( action.data );
             return newState;
         }
-        case FETCH_OFFER_DETAILS_ERROR: {
-            const newState = state.slice();
-            newState.push({id: action.id, error: action.error.message});
-            return newState;
-        }
+        case FETCH_OFFER_DETAILS_ERROR:
+            return state;
         case CHANGE_OFFER_FIELD_VALUE:
             return offerDetailsSelector( state, action.id, item => {
                 //TODO add clone function for deep cloning
@@ -52,6 +52,13 @@ export default function reducer(state=[], action={}){
             return offerDetailsSelector(
                 state, action.id, item => ({...item, saving: false, saved: false, error: action.error.message})
             );
+        case CREATE_NEW_OFFER_DETAILS:{
+            const newState = state.slice();
+            const item = clone(emptyOfferDetails);
+            item.id = action.id;
+            newState.push( item );
+            return newState;
+        }
         default:
             return state;
     }
@@ -114,9 +121,15 @@ export function saveOfferDetails( id ) {
         dispatch( {type: SAVE_OFFER_DETAILS, id} );
 
         const state = getState().offerDetails;
-        const item = extractServiceInformationFromItem(getOfferDetailsById( state, id ));
+        const item = clone(extractServiceInformationFromItem(getOfferDetailsById( state, id )));
+        const isNew = item.createdAt === undefined;
+        const method = isNew ? 'post' : 'put';
+        if( isNew ){
+            item.createdAt = new Date();
+            item.offer.forEach( elem => { elem.createdAt = new Date(); } )
+        }
 
-        return Api.saveOfferDetail( id, item )
+        return Api.saveOfferDetail( id, item, method )
             .then( () => {
                 dispatch( {type: SAVE_OFFER_DETAILS_SUCCESS, id} );
                 dispatch( fetchOfferDetails( id ) );
@@ -139,5 +152,11 @@ export function deleteOfferDetails( id ) {
             .catch( error => {
                 dispatch( {type: DELETE_OFFER_DETAILS_ERROR, error, id} );
             } );
+    }
+}
+
+export function createNewOfferDetails( id ) {
+    return {
+        type: CREATE_NEW_OFFER_DETAILS, id
     }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import OfferDetail from '../components/offer_details/offer_detail';
 import {
     changeOfferFieldValue, getOfferDetailsById, fetchOfferDetails,
-    saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails
+    saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails, createNewOfferDetails
 } from '../reducers/offer_details';
 
 function mapStateToProps( state, ownProps ){
@@ -16,5 +16,6 @@ function mapStateToProps( state, ownProps ){
 
 export default connect(
     mapStateToProps,
-    { changeOfferFieldValue, fetchOfferDetails, saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails }
+    { changeOfferFieldValue, fetchOfferDetails, saveOfferDetails,
+        deleteOfferDetails, resetErrorOfferDetails, createNewOfferDetails }
 )(OfferDetail)

@@ -4,8 +4,8 @@ import OfferDetailProperties from './offer_detail_properties';
 
 const OfferDetail = ( props ) => {
     const {
-        id, offer, changeOfferFieldValue, loading, saving, error,
-        fetchOfferDetails, saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails
+        id, offer, changeOfferFieldValue, loading, saving, error, createdAt,
+        fetchOfferDetails, saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails, createNewOfferDetails
     } = props;
 
     if( loading || saving ){
@@ -17,6 +17,7 @@ const OfferDetail = ( props ) => {
     }
 
     let haveOfferDetails = true;
+    let isNew = true;
     let offerDetails = null;
 
     if( !offer || offer.length === 0 ){
@@ -31,7 +32,8 @@ const OfferDetail = ( props ) => {
                 index = {index}
                 changeOfferFieldValue = {changeOfferFieldValue}
             />
-        )
+        );
+        isNew = createdAt === undefined;
     }
 
     const handleAlertDismiss = () => resetErrorOfferDetails(id);
@@ -51,6 +53,7 @@ const OfferDetail = ( props ) => {
     const save = () => saveOfferDetails(id);
     const refresh = () => fetchOfferDetails(id);
     const del = () => deleteOfferDetails(id);
+    const create = () => createNewOfferDetails(id);
 
     return (
         <Panel>
@@ -64,10 +67,10 @@ const OfferDetail = ( props ) => {
                 <Navbar.Collapse>
                     <Navbar.Form pullLeft>
                         {' '}
-                        <Button disabled = {haveOfferDetails}>Create</Button>
+                        <Button disabled = {haveOfferDetails} onClick={create}>Create</Button>
                         <Button disabled = { ! haveOfferDetails} onClick={save}>Save</Button>
-                        <Button disabled = { ! haveOfferDetails} onClick={del}>Delete</Button>
-                        <Button onClick={refresh}>Refresh</Button>
+                        <Button disabled = { ! haveOfferDetails || isNew} onClick={del}>Delete</Button>
+                        <Button disabled = {isNew} onClick={refresh}>Refresh</Button>
                     </Navbar.Form>
                 </Navbar.Collapse>
             </Navbar>
