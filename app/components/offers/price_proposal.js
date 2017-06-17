@@ -4,13 +4,13 @@ import { Row, Col, Form, FormGroup, FormControl, ControlLabel } from 'react-boot
 const PriceProposal = ( {priceName, amount, currencyCode} ) => {
     return (
         <FormGroup controlId="formHorizontalEmail">
-            <Col componentClass={ControlLabel} xs={4}>
+            <Col componentClass={ControlLabel} xs={5}>
                 {priceName}
             </Col>
             <Col componentClass={ControlLabel} xs={4}>
                 <FormControl type="text" value={amount} disabled/>
             </Col>
-            <Col componentClass={ControlLabel} xs={4}>
+            <Col componentClass={ControlLabel} xs={3}>
                 <FormControl type="text" value={currencyCode} disabled/>
             </Col>
         </FormGroup>

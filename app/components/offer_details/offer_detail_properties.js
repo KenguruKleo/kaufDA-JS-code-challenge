@@ -10,7 +10,7 @@ const OfferDetailProperties = ( props ) => {
 
     return (
         <Row>
-            <Col xs={6}>
+            <Col md={6}>
                 <Form horizontal>
 
                     <InputTextWithLabel type="text" fieldName="name" label="Name" {...props}/>
@@ -24,7 +24,7 @@ const OfferDetailProperties = ( props ) => {
 
                 </Form>
             </Col>
-            <Col xs={6}>
+            <Col md={6}>
                 <form>
                     <InputTextWithLabelVertical type="textarea" fieldName="description" label="Description" {...props}/>
                 </form>

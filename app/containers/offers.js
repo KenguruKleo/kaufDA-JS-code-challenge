@@ -13,7 +13,7 @@ class Offers extends React.Component{
         return (
 
             <Row>
-                <Col xsOffset = {1} xs = {10}>
+                <Col mdOffset = {1} md = {10}>
                     <Navbar>
                         <Navbar.Header>
                             <Navbar.Brand>

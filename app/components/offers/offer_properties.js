@@ -14,7 +14,7 @@ const OfferProperties = ( props) => {
 
     return (
         <Row>
-            <Col xs = {6}>
+            <Col md = {6}>
                 <Form horizontal>
                     <PriceProposal priceName="Reduced price" {...reducedPrice} />
                     <PriceProposal priceName="Original price" {...originalPrice} />
@@ -22,7 +22,7 @@ const OfferProperties = ( props) => {
                     <Button onClick={click}>{ !showDetails ? "Show details":"Hide details" }</Button>
                 </Form>
             </Col>
-            <Col xs = {6}>
+            <Col md = {6}>
                 <Image src={`/images/${productImagePointer.itemName}`} rounded />
             </Col>
         </Row>
