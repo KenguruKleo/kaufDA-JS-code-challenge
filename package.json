@@ -11,7 +11,7 @@
     "build": "webpack -p",
     "server": "node ./server --port 8080",
     "test": "jest",
-    "test-codecov": "jest && codecov",
+    "codecov": "codecov",
     "test:watch": "npm test -- --watch"
   },
   "author": "Yemelianov Konstantin",
