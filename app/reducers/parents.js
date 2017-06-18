@@ -8,35 +8,34 @@ const FETCH_DETAILS = 'kaufDA/parents/FETCH_DETAILS';
 const FETCH_DETAILS_SUCCESS = 'kaufDA/parents/FETCH_DETAILS_SUCCESS';
 const TOGGLE_SHOW_DETAILS = 'kaufDA/parents/TOGGLE_SHOW_DETAILS';
 
+
+function reduceItemsById(state, id, itemReducer){
+    return state.map( item => {
+        if( item.id === id ){
+            return itemReducer( item );
+        } else {
+            return item;
+        }
+    });
+}
+
 function offers(state={}, action){
     switch (action.type) {
         case FETCH_DETAILS:
-            if (action.offerId === state.id){
-                return {
-                    ...state,
-                    loading: true
-                }
-            } else {
-                return {...state}
-            }
+            return {
+                ...state,
+                loading: true
+            };
         case FETCH_DETAILS_SUCCESS:
-            if (action.offerId === state.id){
-                return {
-                    ...state,
-                    loading: false
-                }
-            } else {
-                return {...state}
-            }
+            return {
+                ...state,
+                loading: false
+            };
         case TOGGLE_SHOW_DETAILS:
-            if (action.offerId === state.id){
-                return {
-                    ...state,
-                    showDetails: !state.showDetails
-                }
-            } else {
-                return {...state}
-            }
+            return {
+                ...state,
+                showDetails: !state.showDetails
+            };
         default:
             return {
                 ...state,
@@ -59,23 +58,13 @@ function parent(state=parentInitialState, action={}){
         case TOGGLE_SHOW_DETAILS:
             return {
                 ...state,
-                offers: state.offers.map( item => offers(item, action) )
+                //offers: state.offers.map( item => offers(item, action) )
+                offers: reduceItemsById( state.offers, action.offerId, item => offers(item, action) )
             };
         default:
             return {...state};
     }
 }
-
-function itemSelector(state, id, itemReducer){
-    return state.map( item => {
-        if( item.id === id ){
-            return itemReducer( item );
-        } else {
-            return item;
-        }
-    });
-}
-
 
 const parentsInitialState = {
     parents: [],
@@ -115,7 +104,7 @@ export default function reducer(state=parentsInitialState, action={}){
         case TOGGLE_SHOW_DETAILS:
             return {
                 ...state,
-                parents: itemSelector( state.parents, action.parentId, item => parent(item, action) )
+                parents: reduceItemsById( state.parents, action.parentId, item => parent(item, action) )
             };
         default:
             return {

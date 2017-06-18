@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, PageHeader } from 'react-bootstrap';
 import { fetchParents, toggleShowDetails } from '../reducers/parents';
-import Parent from './parent';
+import Parent from '../components/parent/parent';
 
 class Parents extends React.Component{
     componentDidMount(){
