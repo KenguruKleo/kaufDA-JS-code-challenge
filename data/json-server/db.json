@@ -29,11 +29,11 @@
           "properties": {
             "name": "Apple computer",
             "reducedPrice": {
-              "amount": 1999,
+              "amount": 1199,
               "currencyCode": "USD"
             },
             "originalPrice": {
-              "amount": 1998,
+              "amount": 1499,
               "currencyCode": "USD"
             },
             "productImagePointer": {

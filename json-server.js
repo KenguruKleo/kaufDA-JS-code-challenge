@@ -25,10 +25,40 @@ const db = router_json.db;
 server_json.use(jsonServer.bodyParser);
 server_json.use('/offer_details/:id', (req, res, next) => {
     if (req.method === 'POST' || req.method === 'PUT') {
-        console.log(req.params.id);
         //update parents parents collection
-        const offers = db.get('parents').value();
-        console.log(offers);
+        const parents = db.get('parents').value();
+        if(parents) {
+
+            parents.forEach( parent => {
+                let parentId = undefined;
+
+                const newOffers = parent.offers.map( offer => {
+
+                    if( offer.id === req.params.id){
+                        parentId = parent.id;
+                        const newOffer = Object.assign({}, offer);
+                        const offerDetails = req.body.offer[0];
+
+                        newOffer.properties.name = offerDetails.properties.name;
+                        newOffer.properties.reducedPrice = offerDetails.properties.reducedPrice;
+                        newOffer.properties.originalPrice = offerDetails.properties.originalPrice;
+                        newOffer.properties.productImagePointer = offerDetails.properties.productImagePointer;
+                        return newOffer;
+                    } else {
+                        return offer;
+                    }
+                } );
+                if( parentId ){
+                    const newParent = Object.assign({}, parent);
+                    newParent.offers = newOffers;
+                    db.get('parents')
+                        .find({ id: parentId })
+                        .assign(newParent)
+                        .write();
+                    console.log('updated parent: '+parentId);
+                }
+            } )
+        }
     }
     next();
 });

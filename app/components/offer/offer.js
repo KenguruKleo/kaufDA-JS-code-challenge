@@ -18,7 +18,7 @@ const Offer = ( props ) => {
                 id = {id}
                 parentId = {parentId}
             />
-            { showDetails ? <OfferDetails id={id} loading={loading}/> : null }
+            { showDetails ? <OfferDetails id={id} parentId={parentId} loading={loading}/> : null }
         </Panel>
     );
 };

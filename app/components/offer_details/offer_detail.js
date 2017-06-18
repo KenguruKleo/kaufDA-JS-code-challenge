@@ -4,7 +4,7 @@ import OfferDetailProperties from './offer_detail_properties';
 
 const OfferDetail = ( props ) => {
     const {
-        id, offer, changeOfferFieldValue, loading, saving, error, createdAt,
+        id, offer, changeOfferFieldValue, loading, saving, error, createdAt, parentId,
         fetchOfferDetails, saveOfferDetails, deleteOfferDetails, resetErrorOfferDetails, createNewOfferDetails
     } = props;
 
@@ -50,7 +50,7 @@ const OfferDetail = ( props ) => {
         );
     }
 
-    const save = () => saveOfferDetails(id);
+    const save = () => saveOfferDetails(id, parentId);
     const refresh = () => fetchOfferDetails(id);
     const del = () => deleteOfferDetails(id);
     const create = () => createNewOfferDetails(id);

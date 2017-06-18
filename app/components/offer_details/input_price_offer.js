@@ -7,7 +7,7 @@ export default function InputPriceOffer( props ) {
     const value = properties[fieldName];
 
     const handleChangeAmount = ( id, index, fieldNameInt, newValue ) => {
-        changeOfferFieldValue( id, index, fieldName, {...value, amount: newValue} );
+        changeOfferFieldValue( id, index, fieldName, {...value, amount: +newValue} );
     };
     const handleChangeCurrencyCode = ( id, index, fieldNameInt, newValue ) => {
         changeOfferFieldValue( id, index, fieldName, {...value, currencyCode: newValue} );
@@ -24,6 +24,7 @@ export default function InputPriceOffer( props ) {
                     changeOfferFieldValue = {handleChangeAmount}
                     fieldName="amount"
                     properties = {value}
+                    type="number"
                 />
             </Col>
             <Col xs={4}>

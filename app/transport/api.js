@@ -2,10 +2,24 @@ import Urls from './urls';
 
 export default {
 
-    fetchOffers: function(){
+    fetchParents: function(){
         return fetch(Urls.parents)
             .then(function (res) {
                 return res.json();
+            })
+            .then(
+                data => data
+            )
+    },
+
+    fetchParent: function(id){
+        return fetch( Urls.parents + '/' + id)
+            .then(function (res) {
+                if( res.status === 200 ){
+                    return res.json();
+                } else {
+                    throw ({message: "error fetching parent"});
+                }
             })
             .then(
                 data => data

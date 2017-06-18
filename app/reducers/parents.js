@@ -1,12 +1,15 @@
 import Api from '../transport/api';
 import { fetchOfferDetails } from './offer_details';
 
-const FETCH_OFFERS = 'kaufDA/parents/FETCH_OFFERS';
-const FETCH_OFFERS_SUCCESS = 'kaufDA/parents/FETCH_OFFERS_SUCCESS';
-const FETCH_OFFERS_ERROR = 'kaufDA/parents/FETCH_OFFERS_ERROR';
+const FETCH_PARENTS = 'kaufDA/parents/FETCH_PARENTS';
+const FETCH_PARENTS_SUCCESS = 'kaufDA/parents/FETCH_PARENTS_SUCCESS';
+const FETCH_PARENTS_ERROR = 'kaufDA/parents/FETCH_PARENTS_ERROR';
 const FETCH_DETAILS = 'kaufDA/parents/FETCH_DETAILS';
 const FETCH_DETAILS_SUCCESS = 'kaufDA/parents/FETCH_DETAILS_SUCCESS';
 const TOGGLE_SHOW_DETAILS = 'kaufDA/parents/TOGGLE_SHOW_DETAILS';
+const FETCH_PARENT = 'kaufDA/parents/FETCH_PARENT';
+const FETCH_PARENT_SUCCESS = 'kaufDA/parents/FETCH_PARENT_SUCCESS';
+const FETCH_PARENT_ERROR = 'kaufDA/parents/FETCH_PARENT_ERROR';
 
 
 function reduceItemsById(state, id, itemReducer){
@@ -58,8 +61,32 @@ function parent(state=parentInitialState, action={}){
         case TOGGLE_SHOW_DETAILS:
             return {
                 ...state,
-                //offers: state.offers.map( item => offers(item, action) )
                 offers: reduceItemsById( state.offers, action.offerId, item => offers(item, action) )
+            };
+        case FETCH_PARENT:
+            return {
+                ...state,
+                loading: true
+            };
+        case FETCH_PARENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                ...action.parent,
+                offers: action.parent.offers.map( offer => {
+                    const found = state.offers.filter( offerOld => offerOld.id === offer.id );
+                    if( found ){
+                        return {...found[0], ...offer};
+                    } else {
+                        return offer;
+                    }
+                })
+            };
+        case FETCH_PARENT_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.error.message
             };
         default:
             return {...state};
@@ -75,7 +102,7 @@ const parentsInitialState = {
 
 export default function reducer(state=parentsInitialState, action={}){
     switch (action.type) {
-        case FETCH_OFFERS:
+        case FETCH_PARENTS:
             return {
                 ...state,
                 parents: [],
@@ -83,7 +110,7 @@ export default function reducer(state=parentsInitialState, action={}){
                 error: '',
                 loaded: false
             };
-        case FETCH_OFFERS_SUCCESS:
+        case FETCH_PARENTS_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -91,7 +118,7 @@ export default function reducer(state=parentsInitialState, action={}){
                 loaded: true,
                 parents: action.parents
             };
-        case FETCH_OFFERS_ERROR:
+        case FETCH_PARENTS_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -106,6 +133,13 @@ export default function reducer(state=parentsInitialState, action={}){
                 ...state,
                 parents: reduceItemsById( state.parents, action.parentId, item => parent(item, action) )
             };
+        case FETCH_PARENT:
+        case FETCH_PARENT_SUCCESS:
+        case FETCH_PARENT_ERROR:
+            return {
+                ...state,
+                parents: reduceItemsById( state.parents, action.parentId, item => parent(item, action) )
+            };
         default:
             return {
                 ...state
@@ -115,22 +149,45 @@ export default function reducer(state=parentsInitialState, action={}){
 
 export function fetchParents(){
     return dispatch => {
-        dispatch( {type: FETCH_OFFERS} );
+        dispatch( {type: FETCH_PARENTS} );
 
-        return Api.fetchOffers()
+        return Api.fetchParents()
             .then( data => {
                 dispatch({
-                    type: FETCH_OFFERS_SUCCESS,
+                    type: FETCH_PARENTS_SUCCESS,
                     parents: data
                 });
             })
             .catch( error => {
                 dispatch({
-                    type: FETCH_OFFERS_ERROR,
+                    type: FETCH_PARENTS_ERROR,
                     error: error
                 });
             })
         ;
+    }
+}
+
+export function fetchParent( parentId ){
+    return dispatch => {
+        dispatch( {type: FETCH_PARENT, parentId} );
+
+        return Api.fetchParent( parentId )
+            .then( data => {
+                dispatch({
+                    type: FETCH_PARENT_SUCCESS,
+                    parentId,
+                    parent: data
+                });
+            })
+            .catch( error => {
+                dispatch({
+                    type: FETCH_PARENT_ERROR,
+                    parentId,
+                    error: error
+                });
+            })
+            ;
     }
 }
 

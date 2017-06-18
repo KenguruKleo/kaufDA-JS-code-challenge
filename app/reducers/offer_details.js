@@ -1,6 +1,7 @@
 import Api from '../transport/api';
 import { clone } from '../utils/utils';
 import emptyOfferDetails from '../utils/empty_offer_detiles';
+import { fetchParent } from './parents';
 
 const CHANGE_OFFER_FIELD_VALUE = 'kaufDA/offerDetails/CHANGE_OFFER_FIELD_VALUE';
 const RESET_ERROR_OFFER_DETAILS = 'kaufDA/offerDetails/RESET_ERROR_OFFER_DETAILS';
@@ -116,7 +117,7 @@ function extractServiceInformationFromItem( item ){
     return dataForDB;
 }
 
-export function saveOfferDetails( id ) {
+export function saveOfferDetails( id, parentId ) {
     return (dispatch, getState) => {
         dispatch( {type: SAVE_OFFER_DETAILS, id} );
 
@@ -133,6 +134,10 @@ export function saveOfferDetails( id ) {
             .then( () => {
                 dispatch( {type: SAVE_OFFER_DETAILS_SUCCESS, id} );
                 dispatch( fetchOfferDetails( id ) );
+
+                if( parentId ) {
+                    dispatch(fetchParent( parentId ));
+                }
             })
             .catch( error => {
                 dispatch( {type: SAVE_OFFER_DETAILS_ERROR, error, id} );
