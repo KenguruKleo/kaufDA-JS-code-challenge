@@ -23,3 +23,6 @@ Tested on Node 6.9.1
 
 ## unit tests
 * for unit tests run `npm run tests`
+
+## coverage
+* go to [codecov.io/gh/KenguruKleo/kaufDA-JS-code-challenge/](https://codecov.io/gh/KenguruKleo/kaufDA-JS-code-challenge/tree/master/app)
