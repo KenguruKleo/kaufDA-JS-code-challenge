@@ -5,11 +5,11 @@ import PriceProposal from './price_proposal';
 const OfferProperties = ( props) => {
     const {
         reducedPrice, originalPrice, productImagePointer, toggleShowDetails,
-        showDetails, id
+        showDetails, id, parentId
     } = props;
 
     const click = () => {
-        toggleShowDetails(id);
+        toggleShowDetails(parentId, id);
     };
 
     return (

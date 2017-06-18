@@ -19,16 +19,21 @@ server_json.use(middlewares_json);
 server_json.use(jsonServer.rewriter({
     '/api/': '/',
 }));
-server_json.use(router_json);
+
+const db = router_json.db;
 
 server_json.use(jsonServer.bodyParser);
-server_json.use((req, res, next) => {
-    if (req.method === 'POST') {
-        //req.body.createdAt = Date.now()
+server_json.use('/offer_details/:id', (req, res, next) => {
+    if (req.method === 'POST' || req.method === 'PUT') {
+        console.log(req.params.id);
+        //update parents parents collection
+        const offers = db.get('parents').value();
+        console.log(offers);
     }
-    // Continue to JSON Server router
-    next()
+    next();
 });
+
+server_json.use(router_json);
 
 const db_port = options.db_port || 3000;
 server_json.listen(db_port, function () {

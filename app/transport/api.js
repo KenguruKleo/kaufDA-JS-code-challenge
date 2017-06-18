@@ -3,7 +3,7 @@ import Urls from './urls';
 export default {
 
     fetchOffers: function(){
-        return fetch(Urls.offers)
+        return fetch(Urls.parents)
             .then(function (res) {
                 return res.json();
             })

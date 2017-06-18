@@ -1,5 +1,5 @@
 import React from 'react';
-import Offers from '../containers/offers';
+import Offers from './parents';
 import { Navbar, Panel, Row, Col } from 'react-bootstrap'
 
 class App extends React.Component{

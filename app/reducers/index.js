@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import offers from './offers';
+import parentsReducer from './parents';
 import offerDetails from './offer_details';
 
 export default combineReducers({
-    offers,
+    parentsReducer,
     offerDetails
 });
