@@ -11,6 +11,7 @@
     "build": "webpack -p",
     "server": "node ./server --port 8080",
     "test": "jest",
+    "test-codecov": "jest && codecov",
     "test:watch": "npm test -- --watch"
   },
   "author": "Yemelianov Konstantin",
@@ -36,6 +37,7 @@
     "babel-preset-es2015": "6.22.0",
     "babel-preset-react": "6.23.0",
     "babel-preset-stage-0": "6.22.0",
+    "codecov": "^2.2.0",
     "command-line-args": "^4.0.6",
     "concurrently": "^3.4.0",
     "css-loader": "0.19.0",
@@ -51,5 +53,9 @@
     "url-loader": "0.5.8",
     "webpack": "2.3.3",
     "webpack-dev-server": "2.4.1"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }
