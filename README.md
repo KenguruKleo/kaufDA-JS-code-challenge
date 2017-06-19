@@ -1,5 +1,10 @@
 # Code Challenge for kauf DA
 
+## challenge
+[JS_code_challenge.pdf](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/JS_code_challenge.pdf)
+[parent.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/parent.json)
+[child.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/child.json)
+
 At first you should install `webpack` and `npm`
 
 ## for prod mode
@@ -19,6 +24,7 @@ Tested on Node 6.9.1
 
 ## docker
 * build `docker build -t kengurukleo/kaufda-js-code-challenge .`
+* or you can just pull latest image from docker hub `docker pull kengurukleo/kaufda-js-code-challenge` and than run it 
 * run `docker run -p <port-to-expose>:8080 -d kengurukleo/kaufda-js-code-challenge`
 
 ## unit tests
