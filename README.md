@@ -1,9 +1,9 @@
 # Code Challenge for kauf DA
 
 ## challenge
-[JS_code_challenge.pdf](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/JS_code_challenge.pdf)
-[parent.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/parent.json)
-[child.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/child.json)
+* [JS_code_challenge.pdf](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/JS_code_challenge.pdf)
+* [parent.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/parent.json)
+* [child.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/child.json)
 
 At first you should install `webpack` and `npm`
 
