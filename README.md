@@ -21,7 +21,12 @@ Tested on Node 6.9.1
 * go to [localhost:8080](http://localhost:8080)
 
 ## Database
-DB Server will serve requests on port 3000, currently is used JSON-Server for store data
+DB Server will serve requests on port 3000
+* JSON-Server: currently is used JSON-Server for store data. To manual start - `npm run start-json-server`
+* MongoDB:
+* 1. Pull mongo docker image from DockerHUB `docker pull mongo`
+* 2. Start mongo server `npm run mongo`
+* 3. Start server to work with mongo server and serve requests on port 3000
 
 ## docker
 * build `docker build -t kengurukleo/kaufda-js-code-challenge .`

@@ -6,16 +6,17 @@
   "scripts": {
     "start-dev": "concurrently --kill-others \"npm run start-json-server\" \"npm run webpack-dev-server\"",
     "start": "concurrently --kill-others \"npm run start-json-server\" \"npm run server\"",
-    "start-json-server": "node ./json-server --db_port 3000",
+    "start-json-server": "node ./server/db/json-server/json-server --db_port 3000",
     "webpack-dev-server": "webpack-dev-server --progress --hot --inline --port 8080",
     "build": "webpack -p",
-    "server": "node ./server --port 8080",
+    "server": "node ./server/server --port 8080",
     "test": "jest",
     "codecov": "codecov",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "mongo": "docker run --name mongo -p 127.0.0.1:27017:27017 -d mongo"
   },
-  "author": "Yemelianov Konstantin",
-  "license": "",
+  "author": "Konstantin Yemelianov",
+  "license": "ISC",
   "dependencies": {
     "babel-plugin-syntax-object-rest-spread": "6.13.0",
     "bluebird": "3.4.7",
@@ -37,6 +38,7 @@
     "babel-preset-es2015": "6.22.0",
     "babel-preset-react": "6.23.0",
     "babel-preset-stage-0": "6.22.0",
+    "babel-preset-stage-2": "6.22.0",
     "codecov": "^2.2.0",
     "command-line-args": "^4.0.6",
     "concurrently": "^3.4.0",
@@ -46,6 +48,7 @@
     "http-proxy": "^1.16.2",
     "jest": "^20.0.4",
     "json-server": "^0.10.1",
+    "nodemon": "^1.11.0",
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "react-test-renderer": "15.4.2",

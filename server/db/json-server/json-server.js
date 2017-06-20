@@ -1,5 +1,6 @@
 "use strict";
 const commandLineArgs = require('command-line-args');
+const path = require('path');
 
 const optionDefinitions = [
     { name: 'db_port', alias: 'd', type: Number }
@@ -12,7 +13,8 @@ console.log(options);
 //***************************
 const jsonServer = require('json-server');
 const server_json = jsonServer.create();
-const router_json = jsonServer.router('./data/json-server/db.json');
+const pathToData = path.join(__dirname, './db.json');
+const router_json = jsonServer.router(pathToData);
 const middlewares_json = jsonServer.defaults();
 
 server_json.use(middlewares_json);
