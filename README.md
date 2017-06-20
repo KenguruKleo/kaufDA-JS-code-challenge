@@ -5,7 +5,9 @@
 * [parent.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/parent.json)
 * [child.json](https://github.com/KenguruKleo/kaufDA-JS-code-challenge/blob/master/challange/child.json)
 
-At first you should install `webpack` and `npm`
+## prepare
+At first you should install `node` and `npm`
+Tested on Node 6.9.1
 
 ## for prod mode
 * npm install
@@ -18,9 +20,8 @@ At first you should install `webpack` and `npm`
 * npm run start-dev
 * go to [localhost:8080](http://localhost:8080)
 
-DB Server will serve requests on port 3000
-
-Tested on Node 6.9.1
+## Database
+DB Server will serve requests on port 3000, currently is used JSON-Server for store data
 
 ## docker
 * build `docker build -t kengurukleo/kaufda-js-code-challenge .`
