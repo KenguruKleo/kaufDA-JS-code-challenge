@@ -14,7 +14,8 @@
     "codecov": "codecov",
     "test:watch": "npm test -- --watch",
     "mongo": "docker run --name mongo -p 127.0.0.1:27017:27017 -d mongo",
-    "start-mongo-server": "nodemon ./server/db/mongo --exec babel-node --db_port 3000"
+    "start-mongo-server": "nodemon ./server/db/mongo --exec babel-node --db_port 3000",
+    "mongo-shell": "docker run -it --link mongo:mongo --rm mongo sh -c 'exec mongo \"$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test\"'"
   },
   "author": "Konstantin Yemelianov",
   "license": "ISC",

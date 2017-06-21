@@ -1,3 +1,3 @@
 export default function loadModels() {
-    require('./parent');
+    require('./parents');
 }
