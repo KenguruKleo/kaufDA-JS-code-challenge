@@ -9,7 +9,7 @@ const options = commandLineArgs(optionDefinitions);
 console.log(options);
 
 //*****************************
-//*		 json-server.js
+//*		 index.js
 //***************************
 const jsonServer = require('json-server');
 const server_json = jsonServer.create();
