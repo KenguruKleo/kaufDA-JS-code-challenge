@@ -1,4 +1,5 @@
 import controllers from './controllers';
+import { initDatabase } from './services/init_database';
 
 const parentsController = controllers.parents;
 const offerDetailsController = controllers.offerDetails;
@@ -9,16 +10,18 @@ export default function ( app ) {
         res.send('pong');
     });
 
-    app.get('/parents', parentsController.all);
-    app.get('/parents/:id', parentsController.getOne);
-    app.post('/parents/:id', parentsController.add);
-    app.put('/parents/:id', parentsController.update);
-    app.delete('/parents/:id', parentsController.remove);
+    generateCommonCRUDrouts(app, '/parents', parentsController);
+    generateCommonCRUDrouts(app, '/offer_details', offerDetailsController);
 
-    app.get('/offer_details', offerDetailsController.all);
-    app.get('/offer_details/:id', offerDetailsController.getOne);
-    app.post('/offer_details/:id', offerDetailsController.add);
-    app.put('/offer_details/:id', offerDetailsController.update);
-    app.delete('/offer_details/:id', offerDetailsController.remove);
+    app.get('/init_database', initDatabase);
+
+}
+
+function generateCommonCRUDrouts(app, route, controller){
+    app.get(route, controller.all);
+    app.get(route+'/:id', controller.getOne);
+    app.post(route+'/:id', controller.add);
+    app.put(route+'/:id', controller.update);
+    app.delete(route+'/:id', controller.remove);
 
 }

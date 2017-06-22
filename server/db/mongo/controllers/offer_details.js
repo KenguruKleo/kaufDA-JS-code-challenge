@@ -33,9 +33,9 @@ export function getOne(req, res) {
     const query = { id: req.params.id };
 
     OfferDetails.findOne(query, (err, result) => {
-        if (err) {
-            console.log('Error on save!');
-            return res.status(500).send('We failed to save for some reason');
+        if (err || !result) {
+            console.log('Error on get!');
+            return res.status(404).send('We failed to get for some reason');
         }
         return res.status(200).json(result);
     });
