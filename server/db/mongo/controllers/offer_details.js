@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import OfferDetails from '../models/offer_details';
+import Parents from '../models/parents';
 import mongoose from 'mongoose';
 
 export function all(req, res) {
@@ -16,7 +17,7 @@ export function all(req, res) {
 export function add(req, res) {
     const omitKeys = ['_id'];
     const data = _.omit(req.body, omitKeys);
-    data.id = req.params.id;
+    //data.id = req.params.id;
     console.log(data);
 
     OfferDetails.create(data, (err, result) => {
@@ -47,13 +48,24 @@ export function update(req, res) {
     const omitKeys = ['id', '_id'];
     const data = _.omit(req.body, omitKeys);
 
-    OfferDetails.findOneAndUpdate(query, data, (err) => {
+    OfferDetails.findOneAndUpdate(query, data, (err, result) => {
         if (err) {
             console.log('Error on save!');
             return res.status(500).send('We failed to save for some reason');
         }
+        Parents.update(
+            { offers: { $elemMatch: { id: req.params.id  } } },
+            { $set: { "offers.$.properties.name" : data.offer[0].properties.name} },
+            (err, resultParents) => {
+                if (err) {
+                    console.log('Error on save parent!');
+                    return res.status(500).send('We failed to save for some reason');
+                }
+                return res.status(200).json(result);
+            }
+        );
 
-        return res.status(200).send('Updated successfully');
+
     });
 
 }
@@ -66,7 +78,7 @@ export function remove(req, res) {
             return res.status(500).send('We failed to delete for some reason');
         }
 
-        return res.status(200).send('Removed Successfully');
+        return res.status(200).json('Removed Successfully');
     });
 }
 

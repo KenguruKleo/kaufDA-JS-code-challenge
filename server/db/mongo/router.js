@@ -20,7 +20,7 @@ export default function ( app ) {
 function generateCommonCRUDrouts(app, route, controller){
     app.get(route, controller.all);
     app.get(route+'/:id', controller.getOne);
-    app.post(route+'/:id', controller.add);
+    app.post(route, controller.add);
     app.put(route+'/:id', controller.update);
     app.delete(route+'/:id', controller.remove);
 
