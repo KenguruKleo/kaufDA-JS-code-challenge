@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 export function all(req, res) {
     OfferDetails.find({}).exec((err, result) => {
         if (err) {
-            console.log('Error in first query');
+            console.log('Error in get all query');
             return res.status(500).send('Something went wrong getting the data');
         }
 
@@ -18,14 +18,24 @@ export function add(req, res) {
     const omitKeys = ['_id'];
     const data = _.omit(req.body, omitKeys);
     //data.id = req.params.id;
-    console.log(data);
 
     OfferDetails.create(data, (err, result) => {
         if (err) {
             console.log(err);
             return res.status(400).send(err);
         }
-        return res.send(result);
+        Parents.update(
+            { offers: { $elemMatch: { id: data.id  } } },
+            //{ $set: { "offers.$.properties.name" : data.offer[0].properties.name} },
+            { $set: { "offers.$.properties" : data.offer[0].properties} },
+            (err, resultParents) => {
+                if (err) {
+                    console.log('Error on save parent!');
+                    return res.status(500).send('We failed to save for some reason');
+                }
+                return res.status(200).json(result);
+            }
+        );
     });
 }
 
@@ -55,7 +65,8 @@ export function update(req, res) {
         }
         Parents.update(
             { offers: { $elemMatch: { id: req.params.id  } } },
-            { $set: { "offers.$.properties.name" : data.offer[0].properties.name} },
+            //{ $set: { "offers.$.properties.name" : data.offer[0].properties.name} },
+            { $set: { "offers.$.properties" : data.offer[0].properties} },
             (err, resultParents) => {
                 if (err) {
                     console.log('Error on save parent!');
@@ -64,7 +75,6 @@ export function update(req, res) {
                 return res.status(200).json(result);
             }
         );
-
 
     });
 
