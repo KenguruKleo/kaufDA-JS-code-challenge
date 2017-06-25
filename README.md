@@ -10,14 +10,14 @@ At first you should install `node` and `npm`
 Tested on Node 6.9.1
 
 ## for prod mode
-* npm install
-* npm run build
-* npm run start
+* `npm install`
+* `npm run build`
+* `npm run start` or `npm run start-with-mongo` (mongodb should be started before and serve requests on port 27017)
 * go to [localhost:8080](http://localhost:8080)
 
 ## for dev mode
-* npm install
-* npm run start-dev
+* `npm install`
+* `npm run start-dev` or `npm run start-dev-with-mongo` (mongodb should be started before and serve requests on port 27017)
 * go to [localhost:8080](http://localhost:8080)
 
 ## Database
@@ -26,7 +26,7 @@ DB Server will serve requests on port 3000
 * MongoDB:
 * 1. Pull mongo docker image from DockerHUB `docker pull mongo`
 * 2. Start mongo server `npm run mongo`
-* 3. Start server to work with mongo server and serve requests on port 3000
+* 3. Start server to work with mongo server `npm run start-mongo-server` and serve requests on port 3000
 
 ## docker
 * build `docker build -t kengurukleo/kaufda-js-code-challenge .`

@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start-dev": "concurrently --kill-others \"npm run start-json-server\" \"npm run webpack-dev-server\"",
+    "start-dev-with-mongo": "concurrently --kill-others \"npm run start-mongo-server\" \"npm run webpack-dev-server\"",
     "start": "concurrently --kill-others \"npm run start-json-server\" \"npm run server\"",
+    "start-with-mongo": "concurrently --kill-others \"npm run start-mongo-server\" \"npm run server\"",
     "start-json-server": "node ./server/db/json-server --db_port 3000",
+    "start-mongo-server": "nodemon ./server/db/mongo --exec babel-node --db_port 3000",
     "webpack-dev-server": "webpack-dev-server --progress --hot --inline --port 8080",
     "build": "webpack -p",
     "server": "node ./server/server --port 8080",
@@ -14,7 +17,6 @@
     "codecov": "codecov",
     "test:watch": "npm test -- --watch",
     "mongo": "docker run --name mongo -p 127.0.0.1:27017:27017 -d mongo",
-    "start-mongo-server": "nodemon ./server/db/mongo --exec babel-node --db_port 3000",
     "mongo-shell": "docker run -it --link mongo:mongo --rm mongo sh -c 'exec mongo \"$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test\"'"
   },
   "author": "Konstantin Yemelianov",
@@ -24,6 +26,7 @@
     "bluebird": "3.4.7",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "express-urlrewrite": "^1.2.0",
     "mongoose": "^4.10.7",
     "morgan": "^1.8.2",
     "react": "15.4.2",

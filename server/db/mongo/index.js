@@ -4,6 +4,7 @@ import express from 'express';
 import http from 'http';
 import bodyParcer from 'body-parser';
 import morgan from 'morgan';
+import rewriter from 'express-urlrewrite';
 import router from './router';
 import mongoose from 'mongoose';
 import loadModels from './models';
@@ -40,6 +41,7 @@ const app = express();
 // App Setup
 app.use( morgan('combined') );
 app.use( bodyParcer.json({type: '*/*'}) );
+app.use(rewriter('/api/*','/$1'));
 
 router(app);
 
