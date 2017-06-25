@@ -3,7 +3,7 @@ services:
     myapp:
         build: .
         container_name: "kaufda"
-        image: engurukleo/kaufda-js-code-challenge
+        image: kengurukleo/kaufda-js-code-challenge
             - 80:8080
         links:
             - mongodb
