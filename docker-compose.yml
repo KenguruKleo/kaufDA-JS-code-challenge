@@ -9,6 +9,7 @@ services:
             - mongodb
         depends_on:
             - mongodb
+        command: npm run start-with-mongo
     mongodb:
         image: mongo:latest
         container_name: "mongodb"
