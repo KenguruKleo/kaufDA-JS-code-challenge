@@ -10,7 +10,8 @@ import mongoose from 'mongoose';
 import loadModels from './models';
 
 const optionDefinitions = [
-    { name: 'db_port', alias: 'd', type: Number }
+    { name: 'db_port', alias: 'd', type: Number },
+    { name: 'mongo_host', defaultValue: 'localhost' }
 ];
 const options = commandLineArgs(optionDefinitions);
 console.log(options);
@@ -18,7 +19,9 @@ console.log(options);
 // DB Setup
 mongoose.Promise = global.Promise;
 
-const db = 'mongodb://localhost:27017/kaufda-js-code-challenge';
+const mongo_host = process.env.MONGO_HOST || 'localhost';
+
+const db = 'mongodb://'+mongo_host+':27017/kaufda-js-code-challenge';
 const connect = () => {
     mongoose.connect(db, (err) => {
         if (err) {

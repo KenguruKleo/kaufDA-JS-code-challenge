@@ -4,6 +4,8 @@ services:
         build: .
         container_name: "kaufda"
         image: kengurukleo/kaufda-js-code-challenge
+        environment:
+          - MONGO_HOST=mongodb
         ports:
           - 80:8080
         links:
@@ -21,4 +23,3 @@ services:
           - ./data/db:/data/db
         ports:
           - 27017:27017
-        command: mongod --smallfiles --logpath=/dev/null # --quiet
