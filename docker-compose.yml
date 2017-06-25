@@ -4,11 +4,11 @@ services:
         build: .
         container_name: "kaufda"
         image: kengurukleo/kaufda-js-code-challenge
-            - 80:8080
+          - 80:8080
         links:
-            - mongodb
+          - mongodb
         depends_on:
-            - mongodb
+          - mongodb
         command: npm run start-with-mongo
     mongodb:
         image: mongo:latest
@@ -19,5 +19,5 @@ services:
         volumes:
           - ./data/db:/data/db
         ports:
-            - 27017:27017
+          - 27017:27017
         command: mongod --smallfiles --logpath=/dev/null # --quiet
