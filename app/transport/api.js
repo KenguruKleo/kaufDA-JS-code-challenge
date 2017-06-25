@@ -75,4 +75,15 @@ export default {
             )
     },
 
+    initDatabase: function () {
+        return fetch( Urls.initDatabase )
+            .then( res => {
+                if( res.status === 200 || res.status === 201){
+                    return res;
+                } else {
+                    throw ({message: "error init database"});
+                }
+            })
+    }
+
 };
